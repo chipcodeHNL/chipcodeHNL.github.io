@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>Hotstamp Designer by improviseallday</title>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Hotstamp Designer</h1>
+      <p>Alpha (v0.1), by <a href="https://www.pokerchipforum.com/members/improviseallday.15869/" target="_blank">improviseallday</a></p>
+    </div>
+    <div id="notification" hidden>
+      <p>Download ready. <a id="externalLink" target="_blank">Open SVG</a></p>
+    </div>
+    <div class="mainColumnLayout">
+      <svg xmlns="http://www.w3.org/2000/svg" id="drawing" class="drawing" viewBox="-160 -160 320 320">
+        <circle cx="0" cy="0" r="100" stroke="black" stroke-width="1" fill="red" />
+        <circle cx="0" cy="0" r="61.5" stroke="black" stroke-width="1" fill="red" />
+        <image id="chipImage" width="200" height="200" x="-100" y="-100"/>
+      </svg> 
+      <div class="fieldsColumn">
+        <div class="actionBar">
+          <button id="export">Export</button>
+          <button id="add">Add Field</button></div>
+        <div id="fields" hidden>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
