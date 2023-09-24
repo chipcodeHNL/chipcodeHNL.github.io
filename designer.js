@@ -146,7 +146,7 @@ fields.addEventListener("click", () => {
 });
 
 const chipImage = document.getElementById("chipImage");
-fetch("https://i.imgur.com/8pAOikQ.jpg")
+fetch("tophatandcane.jpg")
   .then(response => response.blob())
   .then(blob => {
     //const val = window.URL.createObjectURL(blob);
