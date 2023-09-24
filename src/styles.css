@@ -1,0 +1,93 @@
+* {
+  box-sizing: border-box;  
+}
+
+body {
+  background-color: #aaa;
+  font-family: Helvetica, sans-serif;
+  padding: 0 20px;
+}
+
+h1 {
+  margin: 0;
+  text-align: center;
+}
+
+p {
+  margin: 5px 0;
+  text-align: center;
+}
+
+.header {
+  margin-bottom: 25px;
+}
+
+button, input {
+  width: 100%;
+}
+
+.actionBar {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 1fr 1fr;
+}
+
+#notification {
+  background-color: #ddd;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  padding: 20px;
+}
+
+.mainColumnLayout {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 320px 1fr;
+}
+
+.drawing {
+  background-color: white;
+  border: 1px solid black;
+  display: block;
+  margin: 0 auto;
+  width: 320px;
+}
+
+.actionBar {
+  margin-bottom: 20px;
+}
+
+#fields, .fields, .actionBar {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+#fields {
+  background-color: #bbb;
+  max-height: 60vh;
+  overflow: scroll;
+}
+
+@media (min-height: 600px) {
+  #fields {
+    max-height: 70vh;
+  }
+}
+
+@media (min-height: 1000px) {
+  #fields {
+    max-height: 80vh;
+  }
+}
+
+.fields, .actionBar {
+  background-color: #ddd;
+}
+
+.fields {
+  display: grid;
+  grid-gap: 2px;
+  grid-template-columns: 120px 1fr;
+  margin: 10px auto;
+}
