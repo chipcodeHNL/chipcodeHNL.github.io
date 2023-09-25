@@ -7,6 +7,13 @@ const GITHUB_PAGES_CHIP_IMG_URL = "https://chipcodehnl.github.io/tophatandcane.j
 const RELATIVE_CHIP_IMG_URL = "tophatandcane.jpg";
 const HOTSTAMP_RADIUS_MM = 24;
 const DISPLAY_RADIUS_PX = 61.5;
+// 12pt = 16px. So we would adjust 8px per 12pt ignoring line height.
+// But the line height has some empty space.
+// The default line height in Inkscape is 1.25.
+// But 1.3 seems to work better, probably something wrong with my math.
+const BASELINE_ADJUST_FACTOR = 8/(12*1.3);
+// And something is even more wrong with my math here. But it works.
+const BASELINE_ADJUST_FACTOR_VERTICAL = 8/(12*1.5);
 const GOLD_COLOR_RGB = "#efcb6c";
 const SQUARE = [
   ["M",-36.2,36.1],
@@ -229,14 +236,6 @@ addButton.addEventListener("click", () => {
   textSizeRange.min = 3;
   textSizeRange.max = 36;
   textSizeRange.value = 12;
-  const updateTextSize = () => {
-    const size = textSizeRange.value;
-    textSizeLabel.innerText = "Size (" + size + "pt)";
-    text.setAttribute("font-size", size + "pt");
-  };
-  
-  textSizeRange.addEventListener("input", updateTextSize);
-  updateTextSize();
   div.appendChild(textSizeLabel);
   div.appendChild(textSizeRange);
   
@@ -382,17 +381,42 @@ addButton.addEventListener("click", () => {
       path.setAttribute("d", scaledShape.flat(Infinity).join(" "));
       
     } else if (isCircularType) {
-      const sweep = fieldTypeSelect.value === "top" ? "1" : "0";
+      const isTop = fieldTypeSelect.value === "top";
+      const sweep = isTop ? "1" : "0";
+      
+      // Our circle scaling factor converts from our internal pixel represeentation to user facing mm measurement.
       const scaledCircleSize = circleSizeRange.value*DISPLAY_RADIUS_PX/HOTSTAMP_RADIUS_MM;
-      path.setAttribute("d", "M -" + scaledCircleSize + " 0 A 1 1, 0, 0 " + sweep + ", " + scaledCircleSize + " 0");  
+      
+      // Text along path uses the path as a baseline.
+      // We want the text to appear in the middle of the path, but alignment-baseline is not implemented in Inkscape.
+      // So instead, change the size of the scaled circle.
+      // See the constant for details on this adjustment factor.
+      // For circle top text, we will make the circle smaller.
+      // For circle bottom text, we will make the circle larger.
+      const adjustmentPx = textSizeRange.value * BASELINE_ADJUST_FACTOR;
+      const adjustedCircleSizePx = isTop ? scaledCircleSize - adjustmentPx : scaledCircleSize + adjustmentPx;
+      console.log(isTop, adjustedCircleSizePx);
+      path.setAttribute("d", "M -" + adjustedCircleSizePx + " 0 A 1 1, 0, 0 " + sweep + ", " + adjustedCircleSizePx + " 0");  
     } else {
+      // And for line text, we will make the line lower by 8px per 12pt.
       const dxPx = xPositionRange.value * 2 * DISPLAY_RADIUS_PX / HOTSTAMP_RADIUS_MM;
       const dyPx = yPositionRange.value * 2 * DISPLAY_RADIUS_PX / HOTSTAMP_RADIUS_MM;
+      const adjustmentPx = textSizeRange.value * BASELINE_ADJUST_FACTOR_VERTICAL;
+      const adjustedDyPx = dyPx + adjustmentPx;
       const xStartPx = -DISPLAY_RADIUS_PX + dxPx;
       const xEndPx = DISPLAY_RADIUS_PX + dxPx;
-      path.setAttribute("d", "M "+ xStartPx+ " " + dyPx + " L " + xEndPx + " " + dyPx);
+      path.setAttribute("d", "M "+ xStartPx+ " " + adjustedDyPx + " L " + xEndPx + " " + adjustedDyPx);
     }
   };
+  
+  const updateTextSize = () => {
+    const size = textSizeRange.value;
+    textSizeLabel.innerText = "Size (" + size + "pt)";
+    text.setAttribute("font-size", size + "pt");
+    updatePath();
+  };
+  textSizeRange.addEventListener("input", updateTextSize);
+  updateTextSize();
   
   const updateIconType = () => {
     updatePath();
