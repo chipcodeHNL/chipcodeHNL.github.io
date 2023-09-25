@@ -168,6 +168,11 @@ fetch(chipImageUrl)
     }
   });
 
+const hideButton = document.getElementById("hide");
+hideButton.addEventListener("click", () => {
+  document.getElementById("instructions").hidden = true;
+});
+
 var counter = 0;
 
 const addButton = document.getElementById("add");
