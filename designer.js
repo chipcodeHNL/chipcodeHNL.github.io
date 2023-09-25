@@ -182,7 +182,6 @@ addButton.addEventListener("click", () => {
   const textPath = document.createElementNS("http://www.w3.org/2000/svg", "textPath");
   
   textPath.setAttribute("fill", GOLD_COLOR_RGB);
-  textPath.setAttribute("alignment-baseline", "middle");
   textPath.setAttribute("href", "#" + div.id);
   textPath.setAttribute("startOffset", "50%");
   textPath.setAttribute("text-anchor", "middle");
