@@ -3,6 +3,8 @@ const drawing = document.getElementById("drawing");
 const notification = document.getElementById("notification");
 const externalLink = document.getElementById("externalLink");
 
+const GITHUB_PAGES_CHIP_IMG_URL = "https://chipcodehnl.github.io/tophatandcane.jpg";
+const RELATIVE_CHIP_IMG_URL = "tophatandcane.jpg";
 const HOTSTAMP_RADIUS_MM = 24;
 const DISPLAY_RADIUS_PX = 61.5;
 const GOLD_COLOR_RGB = "#efcb6c";
@@ -146,7 +148,9 @@ fields.addEventListener("click", () => {
 });
 
 const chipImage = document.getElementById("chipImage");
-fetch("tophatandcane.jpg")
+const isCodepen = window.origin === "https://cdpn.io";
+const chipImageUrl = isCodepen ? GITHUB_PAGES_CHIP_IMG_URL : RELATIVE_CHIP_IMG_URL;
+fetch(chipImageUrl)
   .then(response => response.blob())
   .then(blob => {
     //const val = window.URL.createObjectURL(blob);
