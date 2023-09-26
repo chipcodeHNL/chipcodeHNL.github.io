@@ -40,10 +40,13 @@ button, input {
 }
 
 #notification {
-  display: grid;
-  grid-template-columns: 1fr 150px;
   margin-bottom: 30px;
   padding: 20px;
+}
+
+.notificationGrid {
+  display: grid;
+  grid-template-columns: 1fr 150px;
 }
 
 .mainColumnLayout {
