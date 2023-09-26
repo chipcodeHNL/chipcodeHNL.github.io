@@ -10,8 +10,8 @@ const DISPLAY_RADIUS_PX = 61.5;
 // 12pt = 16px. So we would adjust 8px per 12pt ignoring line height.
 // But the line height has some empty space.
 // The default line height in Inkscape is 1.25.
-// But 1.3 seems to work better, probably something wrong with my math.
-const BASELINE_ADJUST_FACTOR = 8/(12*1.3);
+// But 1.38 seems to work better, probably something wrong with my math.
+const BASELINE_ADJUST_FACTOR = 8/(12*1.38);
 // And something is even more wrong with my math here. But it works.
 const BASELINE_ADJUST_FACTOR_VERTICAL = 8/(12*1.5);
 const GOLD_COLOR_RGB = "#efcb6c";
