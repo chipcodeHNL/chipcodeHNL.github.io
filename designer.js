@@ -400,7 +400,6 @@ addButton.addEventListener("click", () => {
       // For circle bottom text, we will make the circle larger.
       const adjustmentPx = textSizeRange.value * BASELINE_ADJUST_FACTOR;
       const adjustedCircleSizePx = isTop ? scaledCircleSize - adjustmentPx : scaledCircleSize + adjustmentPx;
-      console.log(isTop, adjustedCircleSizePx);
       path.setAttribute("d", "M -" + adjustedCircleSizePx + " 0 A 1 1, 0, 0 " + sweep + ", " + adjustedCircleSizePx + " 0");  
     } else {
       // And for line text, we will make the line lower by 8px per 12pt.
