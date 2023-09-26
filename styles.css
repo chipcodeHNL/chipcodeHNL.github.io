@@ -42,6 +42,8 @@ button, input {
 #notification {
   background-color: #ddd;
   border-radius: 5px;
+  display: grid;
+  grid-template-columns: 1fr 150px;
   margin-bottom: 30px;
   padding: 20px;
 }
